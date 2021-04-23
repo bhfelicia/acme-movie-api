@@ -1,8 +1,5 @@
 const app = require("supertest")(require("../app"));
-const {
-  syncAndSeed,
-  models: { Movie, Actor, Role },
-} = require("../db");
+// const { syncAndSeed } = require("../db");
 
 const { expect } = require("chai");
 
@@ -13,12 +10,33 @@ describe("addition", () => {
 });
 
 describe("Routes", () => {
-  beforeEach(async () => syncAndSeed());
+  // beforeEach(async () => await syncAndSeed());
   describe("GET /", () => {
     it("returns an html page", async () => {
       try {
         const response = await app.get("/");
         expect(response.status).to.equal(200);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  });
+  describe("GET /api/movies", () => {
+    it("returns movies", async () => {
+      try {
+        const movies = await app.get("/api/movies");
+        expect(movies.status).to.equal(200);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  });
+  describe("GET /api/actors", () => {
+    it("retrieves our actors from the db", async () => {
+      try {
+        const response = await app.get("/api/actors");
+        expect(response.status).to.equal(200);
+        console.log("hi");
       } catch (error) {
         console.log(error);
       }

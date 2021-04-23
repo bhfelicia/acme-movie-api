@@ -1,7 +1,8 @@
 const Sequelize = require("sequelize");
 const { STRING } = Sequelize;
 const conn = new Sequelize(
-  process.env.DATABASE_URL || "postgres://localhost/acme_db"
+  process.env.DATABASE_URL || "postgres://localhost/acme_db",
+  { logging: false }
 );
 
 const Movie = conn.define("movie", {
@@ -44,7 +45,6 @@ const syncAndSeed = async () => {
     Actor.create({ name: "Leo" }),
     Actor.create({ name: "Meryl" }),
   ]);
-  console.log(devil.get());
 
   await Promise.all([
     Role.create({ character: "Sully", movieId: sully.id, actorId: hanks.id }),
