@@ -36,7 +36,6 @@ describe("Routes", () => {
       try {
         const response = await app.get("/api/actors");
         expect(response.status).to.equal(200);
-        console.log("hi");
       } catch (error) {
         console.log(error);
       }
