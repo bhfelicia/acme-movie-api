@@ -1,4 +1,8 @@
 const app = require("supertest")(require("../app"));
+const {
+  syncAndSeed,
+  models: { Movie, Actor, Role },
+} = require("../db");
 
 const { expect } = require("chai");
 
@@ -9,6 +13,7 @@ describe("addition", () => {
 });
 
 describe("Routes", () => {
+  beforeEach(async () => syncAndSeed());
   describe("GET /", () => {
     it("returns an html page", async () => {
       try {
